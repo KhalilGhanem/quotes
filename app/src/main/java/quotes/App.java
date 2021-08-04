@@ -3,7 +3,17 @@
  */
 package quotes;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class App {
     public String getGreeting() {
@@ -13,7 +23,66 @@ public class App {
     public static void main(String[] args) {
 
         System.out.println(new App().getGreeting());
+        String conJson="[{\n" +
+                "    \"tags\": [\n" +
+                "      \"attributed-no-source\"\n" +
+                "    ],\n" +
+                "    \"author\": \"Marilyn Monroe\",\n" +
+                "    \"likes\": \"18651 likes\",\n" +
+                "    \"text\": \" “I am good, but not an angel. I do sin, but I am not the devil. I am just a small girl in a big world trying to find someone to love.” \"\n" +
+                "  }]";
 
+        ArrayList<Quotes> quotesLost = new ArrayList<Quotes>();
         Gson gson=new Gson();
+//        Quotes q1=gson.fromJson(conJson,Quotes.class);
+//        Type quotesGson=new TypeToken<ArrayList<Quotes>>().getType();
+        Type quotesGson=new TypeToken<List<Quotes>>(){}.getType();
+//        Quotes q1=gson.fromJson(conJson,new TypeToken<List<Quotes>>(){}.getType());
+//        Quotes q1=gson.fromJson(conJson,quotesGson);
+//        System.out.println(q1);
+
+
+        Path path= Paths.get("recentquotes.json");
+        Path path1= Paths.get("test.json");
+        System.out.println("from method "+generateRandomQuote(path1));
+//        try (BufferedReader reader = Files.newBufferedReader(path)) {
+//            quotesLost=gson.fromJson(reader,quotesGson);
+//            String line = reader.readLine();
+//            while (line != null){
+////                System.out.println(line);
+//                line = reader.readLine();
+//            }
+//            int rand=1+(int)(Math.random()*quotesLost.size());
+//            System.out.println(rand);
+//            Quotes newa=quotesLost.get(rand);
+//            System.out.println(newa);
+//        } catch (Exception  e) {
+//            e.printStackTrace();
+//        }
+    }
+    public static Quotes generateRandomQuote(Path path){
+        ArrayList<Quotes> quotesLost = new ArrayList<Quotes>();
+        Gson gson=new Gson();
+        String [] arr=new String[5];
+        Quotes newquot=new Quotes(arr,"","","");
+        Type quotesGson=new TypeToken<List<Quotes>>(){}.getType();
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
+            quotesLost=gson.fromJson(reader,quotesGson);
+            String line = reader.readLine();
+            while (line != null){
+//                System.out.println(line);
+                line = reader.readLine();
+            }
+            System.out.println(quotesLost.size());
+
+                int rand =  (int) (Math.random() * quotesLost.size());
+                System.out.println(rand);
+                newquot = quotesLost.get(rand);
+                System.out.println(newquot);
+
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+    return newquot;
     }
 }
