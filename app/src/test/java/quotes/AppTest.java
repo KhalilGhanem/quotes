@@ -18,7 +18,9 @@ class AppTest {
     }
     @Test void testqoutes(){
         Path path1= Paths.get("src/main/resources/test.json");
-        assertEquals("Quotes{tags=[attributed-no-source], author='Marilyn Monroe', likes='18651 likes', text=' “I am good, but not an angel. I do sin, but I am not the devil. I am just a small girl in a big world trying to find someone to love.” '}",generateRandomQuote(path1));
-
+        Quotes newquote=generateRandomQuote(path1);
+//        assertEquals("Quotes{tags=[attributed-no-source], author='Marilyn Monroe', likes='18651 likes', text=' “I am good, but not an angel. I do sin, but I am not the devil. I am just a small girl in a big world trying to find someone to love.” '}",generateRandomQuote(path1));
+           assertEquals("18651 likes",newquote.likes);
     }
+
 }

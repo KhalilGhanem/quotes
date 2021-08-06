@@ -11,3 +11,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
 }
 ```
+## Lab 09
+Added a new feature that allow the application to get a random quote from an api.

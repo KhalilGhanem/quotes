@@ -27,7 +27,6 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
-
         String apiuRL = "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en";
         try {
             URL url = new URL(apiuRL);
@@ -44,7 +43,6 @@ public class App {
                 String line = bufferedReader.readLine();
                     System.out.println(line);
 
-
                 bufferedReader.close();
             } else{
                 Path path= Paths.get("recentquotes.json");
@@ -52,9 +50,10 @@ public class App {
             }
 
             connection.disconnect();
-
         } catch (IOException e){
-            e.printStackTrace();
+            System.out.println("Connection error \n Offline quotes");
+            Path path= Paths.get("recentquotes.json");
+            System.out.println("from method "+generateRandomQuote(path));
         }
 
         // lab 08: Batool please uncomment to two lines below and test it again
