@@ -52,12 +52,14 @@ public class App {
             }
 
             connection.disconnect();
-            
+
         } catch (IOException e){
             e.printStackTrace();
         }
 
-
+        // lab 08: Batool please uncomment to two lines below and test it again
+//        Path path= Paths.get("recentquotes.json");
+//        System.out.println("from method "+generateRandomQuote(path));
 
 
         //        Path path1= Paths.get("test.json");
@@ -77,10 +79,10 @@ public class App {
 //                System.out.println(line);
                 line = reader.readLine();
             }
-            System.out.println(quotesLost.size());
+//            System.out.println(quotesLost.size());
 
                 int rand =  (int) (Math.random() * quotesLost.size());
-                System.out.println(rand);
+//                System.out.println(rand);
                 newquot = quotesLost.get(rand);
                 System.out.println(newquot);
 
